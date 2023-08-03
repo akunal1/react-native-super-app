@@ -1,0 +1,27 @@
+{
+  "name": "super-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Avinash Nayak",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/Field",
+    "packages/Host"
+  ],
+  "packageManager": "yarn@3.4.1",
+  "scripts": {
+    "bootstrap": "yarn && yarn workspaces foreach run bootstrap",
+    "start": "concurrently -P 'yarn:start:*(!standalone) {1}'",
+    "start:host": "yarn workspace Host run start",
+    "start:Field": "yarn workspace Field run start",
+    "run:Host:ios": "yarn workspace Host run ios",
+    "run:Host:android": "yarn workspace Host run android",
+    "run:Field:ios": "yarn workspace Field run ios",
+    "run:Field:android": "yarn workspace Field run android",
+    "adbreverse": "adb reverse tcp:8081 tcp:8081 &&  adb reverse tcp:9000 tcp:9000 "
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
